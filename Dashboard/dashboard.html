@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="da">
+<head>
+  <meta charset="UTF-8" />
+  <title>Pi Kamera Dashboard</title>
+
+  <!-- Vue 3 -->
+  <script src="https://unpkg.com/vue@3"></script>
+
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Chart.js -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+  <!-- Vores JavaScript -->
+  <script src="dashboard.js" defer></script>
+</head>
+<body class="bg-gray-100 text-gray-800 font-sans">
+  <div id="app" class="max-w-screen-xl mx-auto p-6">
+    <h1 class="text-3xl font-bold mb-6 text-center">📊 Pi Kamera Dashboard</h1>
+
+    <!-- Kontrolknapper -->
+    <div class="flex flex-wrap justify-center gap-4 mb-8">
+      <button @click="hentBilleder" class="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded">
+        🔄 Opdater billeder
+      </button>
+      <button @click="tagBillede" class="bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded">
+        📸 Tag nyt billede
+      </button>
+    </div>
+
+    <div class="grid grid-cols-1 lg:grid-cols-4 gap-6">
+        <!-- Seneste nummerplader (venstre kolonne) -->
+        <div class="lg:col-span-1 bg-white p-4 rounded shadow h-full">
+          <h2 class="text-lg font-semibold mb-3">🔍 Sidste 10 registreringer</h2>
+          <ul class="space-y-1 text-sm font-mono max-h-96 overflow-y-auto">
+            <li v-for="plade in nummerplader" :key="plade" class="border-b pb-1">{{ plade }}</li>
+          </ul>
+        </div>
+      
+        <!-- Statistik og billeder (højre kolonne) -->
+        <div class="lg:col-span-3 space-y-8">
+          <!-- Statistiksektion -->
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <div class="bg-white p-6 rounded shadow">
+              <h2 class="text-xl font-semibold mb-3 text-center">🚗 Kørselstype</h2>
+              <canvas id="chartKørsel"></canvas>
+            </div>
+            <div class="bg-white p-6 rounded shadow">
+              <h2 class="text-xl font-semibold mb-3 text-center">🚘 Biltyper</h2>
+              <canvas id="chartTyper"></canvas>
+            </div>
+          </div>
+      
+        
+      
+          <!-- Galleri -->
+          <div>
+            <h2 class="text-xl font-semibold mb-4">📸 Billedgalleri</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+              <div v-for="billede in billeder" :key="billede" class="bg-white rounded shadow p-4">
+                <img :src="`http://<pi_ip>:5000/images/${billede}`" :alt="billede" class="w-full h-48 object-cover rounded mb-2" />
+                <p class="text-center text-sm font-mono">{{ billede }}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+</body>
+</html>
