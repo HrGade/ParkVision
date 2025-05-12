@@ -1,0 +1,6 @@
+@ParkVision.Server_HostAddress = http://localhost:5049
+
+GET {{ParkVision.Server_HostAddress}}/api/
+Accept: application/json
+
+###
