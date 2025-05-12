@@ -1,0 +1,9 @@
+﻿################################################################################
+# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
+################################################################################
+
+/.vs
+/.vs/ParkVision/v17
+/.vs/ParkVision/v17/.wsuo
+/.vs/ParkVision/v17/DocumentLayout.json
+/.vs/VSWorkspaceState.json
