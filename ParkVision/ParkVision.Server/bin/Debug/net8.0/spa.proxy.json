@@ -1,0 +1,10 @@
+{
+"SpaProxyServer": {
+"ServerUrl": "https://localhost:50296",
+"RedirectUrl": "",
+"LaunchCommand": "npm run dev",
+"WorkingDirectory": "C:\\Users\\fck\\source\\repos\\HrGade\\ParkVision\\ParkVision\\ParkVision.Server\\..\\parkvision.client",
+"MaxTimeoutInSeconds": "120",
+"KeepRunning": "false"
+}
+}

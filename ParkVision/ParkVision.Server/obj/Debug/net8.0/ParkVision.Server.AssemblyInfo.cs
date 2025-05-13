@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("ParkVision.Server")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+366195dde002de5852b4ac75394d7a1f689391f3")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+19e7acd35ede411a2e30312bf33a7e0470c6f1ec")]
 [assembly: System.Reflection.AssemblyProductAttribute("ParkVision.Server")]
 [assembly: System.Reflection.AssemblyTitleAttribute("ParkVision.Server")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

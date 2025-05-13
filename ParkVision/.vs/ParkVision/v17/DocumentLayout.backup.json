@@ -3,8 +3,28 @@
   "WorkspaceRootPath": "C:\\Users\\fck\\source\\repos\\HrGade\\ParkVision\\ParkVision\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{DCA0D2E4-6AC4-4D23-AAC4-290A6B889681}|ParkVision.Server\\ParkVision.Server.csproj|c:\\users\\fck\\source\\repos\\hrgade\\parkvision\\parkvision\\parkvision.server\\controllers\\bilercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{DCA0D2E4-6AC4-4D23-AAC4-290A6B889681}|ParkVision.Server\\ParkVision.Server.csproj|solutionrelative:parkvision.server\\controllers\\bilercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{76D836D8-5EAB-47CC-1C6C-DE0A4882A8BD}|parkvision.client\\parkvision.client.esproj|c:\\users\\fck\\source\\repos\\hrgade\\parkvision\\parkvision\\parkvision.client\\src\\components\\helloworld.vue||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{76D836D8-5EAB-47CC-1C6C-DE0A4882A8BD}|parkvision.client\\parkvision.client.esproj|solutionrelative:parkvision.client\\src\\components\\helloworld.vue||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|c:\\Users\\fck\\source\\repos\\HrGade\\ParkVision\\ParkVision\\parkvision.client\\node_modules\\@vue\\runtime-core\\dist\\runtime-core.esm-bundler.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}|",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:parkvision.client\\node_modules\\@vue\\runtime-core\\dist\\runtime-core.esm-bundler.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}|"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{76D836D8-5EAB-47CC-1C6C-DE0A4882A8BD}|parkvision.client\\parkvision.client.esproj|c:\\users\\fck\\source\\repos\\hrgade\\parkvision\\parkvision\\parkvision.client\\src\\app.vue||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{76D836D8-5EAB-47CC-1C6C-DE0A4882A8BD}|parkvision.client\\parkvision.client.esproj|solutionrelative:parkvision.client\\src\\app.vue||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{76D836D8-5EAB-47CC-1C6C-DE0A4882A8BD}|parkvision.client\\parkvision.client.esproj|c:\\users\\fck\\source\\repos\\hrgade\\parkvision\\parkvision\\parkvision.client\\src\\main.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
+      "RelativeMoniker": "D:0:0:{76D836D8-5EAB-47CC-1C6C-DE0A4882A8BD}|parkvision.client\\parkvision.client.esproj|solutionrelative:parkvision.client\\src\\main.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{76D836D8-5EAB-47CC-1C6C-DE0A4882A8BD}|parkvision.client\\parkvision.client.esproj|c:\\users\\fck\\source\\repos\\hrgade\\parkvision\\parkvision\\parkvision.client\\index.html||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{76D836D8-5EAB-47CC-1C6C-DE0A4882A8BD}|parkvision.client\\parkvision.client.esproj|solutionrelative:parkvision.client\\index.html||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{76D836D8-5EAB-47CC-1C6C-DE0A4882A8BD}|parkvision.client\\parkvision.client.esproj|c:\\users\\fck\\source\\repos\\hrgade\\parkvision\\parkvision\\parkvision.client\\vite.config.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
+      "RelativeMoniker": "D:0:0:{76D836D8-5EAB-47CC-1C6C-DE0A4882A8BD}|parkvision.client\\parkvision.client.esproj|solutionrelative:parkvision.client\\vite.config.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
     }
   ],
   "DocumentGroupContainers": [
@@ -14,8 +34,78 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 5,
+          "SelectedChildIndex": 2,
           "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "main.js",
+              "DocumentMoniker": "C:\\Users\\fck\\source\\repos\\HrGade\\ParkVision\\ParkVision\\parkvision.client\\src\\main.js",
+              "RelativeDocumentMoniker": "parkvision.client\\src\\main.js",
+              "ToolTip": "C:\\Users\\fck\\source\\repos\\HrGade\\ParkVision\\ParkVision\\parkvision.client\\src\\main.js",
+              "RelativeToolTip": "parkvision.client\\src\\main.js",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
+              "WhenOpened": "2025-05-13T01:44:05.836Z",
+              "IsPinned": true,
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "App.vue",
+              "DocumentMoniker": "C:\\Users\\fck\\source\\repos\\HrGade\\ParkVision\\ParkVision\\parkvision.client\\src\\App.vue",
+              "RelativeDocumentMoniker": "parkvision.client\\src\\App.vue",
+              "ToolTip": "C:\\Users\\fck\\source\\repos\\HrGade\\ParkVision\\ParkVision\\parkvision.client\\src\\App.vue",
+              "RelativeToolTip": "parkvision.client\\src\\App.vue",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABMAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003491|",
+              "WhenOpened": "2025-05-13T01:44:10.228Z",
+              "IsPinned": true,
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "HelloWorld.vue",
+              "DocumentMoniker": "C:\\Users\\fck\\source\\repos\\HrGade\\ParkVision\\ParkVision\\parkvision.client\\src\\components\\HelloWorld.vue",
+              "RelativeDocumentMoniker": "parkvision.client\\src\\components\\HelloWorld.vue",
+              "ToolTip": "C:\\Users\\fck\\source\\repos\\HrGade\\ParkVision\\ParkVision\\parkvision.client\\src\\components\\HelloWorld.vue",
+              "RelativeToolTip": "parkvision.client\\src\\components\\HelloWorld.vue",
+              "ViewState": "AgIAADAAAAAAAAAAAAAAAE4AAAAwAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003491|",
+              "WhenOpened": "2025-05-13T01:45:27.799Z",
+              "IsPinned": true,
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "index.html",
+              "DocumentMoniker": "C:\\Users\\fck\\source\\repos\\HrGade\\ParkVision\\ParkVision\\parkvision.client\\index.html",
+              "RelativeDocumentMoniker": "parkvision.client\\index.html",
+              "ToolTip": "C:\\Users\\fck\\source\\repos\\HrGade\\ParkVision\\ParkVision\\parkvision.client\\index.html",
+              "RelativeToolTip": "parkvision.client\\index.html",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001512|",
+              "WhenOpened": "2025-05-13T01:45:54.925Z",
+              "IsPinned": true,
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "vite.config.js",
+              "DocumentMoniker": "C:\\Users\\fck\\source\\repos\\HrGade\\ParkVision\\ParkVision\\parkvision.client\\vite.config.js",
+              "RelativeDocumentMoniker": "parkvision.client\\vite.config.js",
+              "ToolTip": "C:\\Users\\fck\\source\\repos\\HrGade\\ParkVision\\ParkVision\\parkvision.client\\vite.config.js",
+              "RelativeToolTip": "parkvision.client\\vite.config.js",
+              "ViewState": "AgIAAB4AAAAAAAAAAAAjwC8AAAANAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
+              "WhenOpened": "2025-05-13T01:50:19.583Z",
+              "IsPinned": true,
+              "EditorCaption": ""
+            },
             {
               "$type": "Bookmark",
               "Name": "ST:0:0:{1c4feeaa-4718-4aa9-859d-94ce25d182ba}"
@@ -38,15 +128,15 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "BilerController.cs",
-              "DocumentMoniker": "C:\\Users\\fck\\source\\repos\\HrGade\\ParkVision\\ParkVision\\ParkVision.Server\\Controllers\\BilerController.cs",
-              "RelativeDocumentMoniker": "ParkVision.Server\\Controllers\\BilerController.cs",
-              "ToolTip": "C:\\Users\\fck\\source\\repos\\HrGade\\ParkVision\\ParkVision\\ParkVision.Server\\Controllers\\BilerController.cs",
-              "RelativeToolTip": "ParkVision.Server\\Controllers\\BilerController.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-13T01:20:52.233Z",
+              "DocumentIndex": 1,
+              "Title": "runtime-core.esm-bundler.js",
+              "DocumentMoniker": "c:\\Users\\fck\\source\\repos\\HrGade\\ParkVision\\ParkVision\\parkvision.client\\node_modules\\@vue\\runtime-core\\dist\\runtime-core.esm-bundler.js",
+              "RelativeDocumentMoniker": "parkvision.client\\node_modules\\@vue\\runtime-core\\dist\\runtime-core.esm-bundler.js",
+              "ToolTip": "c:\\Users\\fck\\source\\repos\\HrGade\\ParkVision\\ParkVision\\parkvision.client\\node_modules\\@vue\\runtime-core\\dist\\runtime-core.esm-bundler.js",
+              "RelativeToolTip": "parkvision.client\\node_modules\\@vue\\runtime-core\\dist\\runtime-core.esm-bundler.js",
+              "ViewState": "AgIAAPcAAAAAAAAAAAApwAsBAAAGAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
+              "WhenOpened": "2025-05-13T01:56:16.812Z",
               "EditorCaption": ""
             }
           ]
