@@ -41,3 +41,16 @@
 /ParkVision/.vs/ParkVision/FileContentIndex/d663d410-1675-49c5-9726-3c33cad127f5.vsidx
 /ParkVision/.vs/ParkVision/DesignTimeBuild/.dtbcache.v2
 *.vsidx
+/ParkVision/ParkVision.Server/bin/Debug/net8.0
+/ParkVision/ParkVision.Server/obj/Debug/net8.0/staticwebassets
+/ParkVision/ParkVision.Server/obj/Debug/net8.0/ParkVisi.A132B104.Up2Date
+/ParkVision/ParkVision.Server/obj/Debug/net8.0/ParkVision.Server.csproj.AssemblyReference.cache
+/ParkVision/ParkVision.Server/obj/Debug/net8.0/ParkVision.Server.csproj.FileListAbsolute.txt
+/ParkVision/ParkVision.Server/obj/Debug/net8.0/ParkVision.Server.GeneratedMSBuildEditorConfig.editorconfig
+/ParkVision/ParkVision.Server/obj/Debug/net8.0/ParkVision.Server.genruntimeconfig.cache
+/ParkVision/ParkVision.Server/obj/Debug/net8.0/ParkVision.Server.MvcApplicationPartsAssemblyInfo.cache
+/ParkVision/ParkVision.Server/obj/Debug/net8.0/ParkVision.Server.MvcApplicationPartsAssemblyInfo.cs
+/ParkVision/ParkVision.Server/obj/Debug/net8.0/spa.proxy.json
+/ParkVision/ParkVision.Server/obj/Debug/net8.0/staticwebassets.build.endpoints.json
+/ParkVision/ParkVision.Server/obj/Debug/net8.0/staticwebassets.build.json
+*.cache
