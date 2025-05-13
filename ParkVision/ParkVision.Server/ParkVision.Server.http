@@ -1,0 +1,6 @@
+@ParkVision.Server_HostAddress = http://localhost:5269
+
+GET {{ParkVision.Server_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
