@@ -49,11 +49,6 @@
   </div>
   </div>
   </div>
-  <!--<tr v-for="bil in post" :key="bil.Nummerplade">
-    <td>{{ bil.nummerplade }}</td>
-    <td>{{ bil.bilTypeID }}</td>
-    <td>{{ bil.modelID }}</td>
-  </tr>-->
   </body>
 </template>
 

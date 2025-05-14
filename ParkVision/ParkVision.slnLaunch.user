@@ -1,0 +1,15 @@
+[
+  {
+    "Name": "New Profile",
+    "Projects": [
+      {
+        "Path": "ParkVision.Server\\ParkVision.Server.csproj",
+        "Action": "Start"
+      },
+      {
+        "Path": "parkvision.client\\parkvision.client.esproj",
+        "Action": "Start"
+      }
+    ]
+  }
+]
