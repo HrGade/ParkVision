@@ -4,7 +4,7 @@ using ParkVision.Server.Model;
 
 namespace ParkVision.Server.Repository
 {
-    public class BilRepositoryDB : IBilRepositoryDB
+    public class BilRepositoryDB : IBilRepository
     {
         private readonly BilDbContext _context;
 

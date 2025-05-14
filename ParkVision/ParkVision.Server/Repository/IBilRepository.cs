@@ -2,7 +2,7 @@
 
 namespace ParkVision.Server.Repository
 {
-    public interface IBilRepositoryDB
+    public interface IBilRepository
     {
         Task AddBilAsync(Bil bil);
         Task<bool> BilExistsAsync(string id);
