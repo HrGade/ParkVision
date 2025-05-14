@@ -25,15 +25,35 @@
         <!-- Statistik og billeder (højre kolonne) -->
         <div class="lg:col-span-3 space-y-8">
           <!-- Statistiksektion -->
-          <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+
+            <!-- Kørselstype -->
             <div class="bg-white p-6 rounded shadow">
               <h2 class="text-xl font-semibold mb-3 text-center">🚗 Kørselstype</h2>
               <canvas id="chartKørsel"></canvas>
             </div>
+
+            <!-- Biltyper -->
             <div class="bg-white p-6 rounded shadow">
               <h2 class="text-xl font-semibold mb-3 text-center">🚘 Biltyper</h2>
               <canvas id="chartTyper"></canvas>
             </div>
+
+            <!-- Ledige pladser -->
+            <div class="bg-white p-6 rounded shadow text-center">
+              <h2 class="text-xl font-semibold mb-2">🅿️ Ledige pladser</h2>
+              <p class="text-4xl font-bold"
+                 :class="{
+                 'text-green-600' : ledigePladser>
+                10,
+                'text-yellow-500': ledigePladser <= 10 && ledigePladser > 3,
+                'text-red-600': ledigePladser <= 3
+                }"
+                >
+                {{ ledigePladser }} / {{ maxPladser }}
+              </p>
+            </div>
+
           </div>
         </div>
 
@@ -44,10 +64,12 @@
             <div v-for="billede in billeder" :key="billede" class="bg-white rounded shadow p-4">
               <img :src="`http://<pi_ip>:5000/images/${billede}`" :alt="billede" class="w-full h-48 object-cover rounded mb-2" />
               <p class="text-center text-sm font-mono">{{ billede }}</p>
-  </div>
-  </div>
-  </div>
-  </div>
+
+           
+            </div>
+        </div>
+     </div>
+   </div>
   </div>
   <!--<tr v-for="bil in post" :key="bil.Nummerplade">
     <td>{{ bil.nummerplade }}</td>
@@ -87,7 +109,19 @@
                     this.loading = false;
                 }
             }
-        },
+      },
+
+      data() {
+        return {
+          loading: false, post: null, billeder: [], maxPladser: 40
+        }
+      },
+      computed: {
+        ledigePladser() {
+          return this.maxPladser - (this.post ? this.post.length : 0);
+        }
+
+      }
     });
 </script>
 
@@ -109,4 +143,5 @@
     margin-left: auto;
     margin-right: auto;
   }
+
 </style>
