@@ -53,3 +53,8 @@
 /ParkVision/ParkVision.Server/obj/Debug/net8.0/staticwebassets.build.endpoints.json
 /ParkVision/ParkVision.Server/obj/Debug/net8.0/staticwebassets.build.json
 *.cache
+/ParkVision/ParkVision.Server/obj/ParkVision.Server.csproj.nuget.g.targets
+/ParkVision/ParkVision.Server/obj/Release/net8.0/.NETCoreApp,Version=v8.0.AssemblyAttributes.cs
+/ParkVision/ParkVision.Server/obj/Release/net8.0/ParkVision.Server.AssemblyInfo.cs
+/ParkVision/ParkVision.Server/obj/Release/net8.0/ParkVision.Server.GeneratedMSBuildEditorConfig.editorconfig
+/ParkVision/ParkVision.Server/obj/Release/net8.0/ParkVision.Server.GlobalUsings.g.cs
