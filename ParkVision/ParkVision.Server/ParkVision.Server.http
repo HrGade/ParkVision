@@ -1,6 +1,6 @@
-@ParkVision.Server_HostAddress = http://localhost:5049
+@ParkVision.Server_HostAddress = http://localhost:5269
 
-GET {{ParkVision.Server_HostAddress}}/api/
+GET {{ParkVision.Server_HostAddress}}/weatherforecast/
 Accept: application/json
 
 ###

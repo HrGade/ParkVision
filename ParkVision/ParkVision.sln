@@ -1,11 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
-VisualStudioVersion = 17.13.35931.197 d17.13
+VisualStudioVersion = 17.13.35931.197
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{54A90642-561A-4BB1-A94E-469ADEE60C69}") = "parkvision.client", "parkvision.client\parkvision.client.esproj", "{76D836D8-5EAB-47CC-1C6C-DE0A4882A8BD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ParkVision.Server", "ParkVision.Server\ParkVision.Server.csproj", "{DCA0D2E4-6AC4-4D23-AAC4-290A6B889681}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ParkVision.Server", "ParkVision.Server\ParkVision.Server.csproj", "{4606E0B4-CCB3-44AF-8774-81F76B7563BD}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,19 +15,18 @@ Global
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{76D836D8-5EAB-47CC-1C6C-DE0A4882A8BD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{76D836D8-5EAB-47CC-1C6C-DE0A4882A8BD}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{76D836D8-5EAB-47CC-1C6C-DE0A4882A8BD}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
 		{76D836D8-5EAB-47CC-1C6C-DE0A4882A8BD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{76D836D8-5EAB-47CC-1C6C-DE0A4882A8BD}.Release|Any CPU.Build.0 = Release|Any CPU
 		{76D836D8-5EAB-47CC-1C6C-DE0A4882A8BD}.Release|Any CPU.Deploy.0 = Release|Any CPU
-		{DCA0D2E4-6AC4-4D23-AAC4-290A6B889681}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{DCA0D2E4-6AC4-4D23-AAC4-290A6B889681}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{DCA0D2E4-6AC4-4D23-AAC4-290A6B889681}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{DCA0D2E4-6AC4-4D23-AAC4-290A6B889681}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4606E0B4-CCB3-44AF-8774-81F76B7563BD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4606E0B4-CCB3-44AF-8774-81F76B7563BD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4606E0B4-CCB3-44AF-8774-81F76B7563BD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4606E0B4-CCB3-44AF-8774-81F76B7563BD}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {1CB83C21-9416-45BB-BA9F-DA8F0FED8262}
+		SolutionGuid = {FC70A02A-35A0-4043-B36B-DC47B4E9EAC9}
 	EndGlobalSection
 EndGlobal
