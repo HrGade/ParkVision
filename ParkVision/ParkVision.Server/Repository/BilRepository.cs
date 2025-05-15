@@ -19,7 +19,7 @@ public class BilRepository : IBilRepository
         return await Task.FromResult(bil);
     }
 
-    public async Task AddAsync(Bil bil)
+    public async Task<Bil> AddAsync(Bil bil)
     {
         if (await ExistsAsync(bil.Nummerplade))
         {
@@ -28,18 +28,21 @@ public class BilRepository : IBilRepository
                 nameof(bil));
         }
         _biler.Add(bil);
+        return bil;
     }
 
-    public async Task DeleteAsync(string id)
+    public async Task<Bil> DeleteAsync(string id)
     {
         Bil? bilToBeDeleted = await GetByIdAsync(id);
         _ = _biler.Remove(bilToBeDeleted);
+        return bilToBeDeleted;
     }
 
-    public async Task UpdateAsync(Bil bil)
+    public async Task<Bil> UpdateAsync(Bil bil)
     {
         Bil? bilToBeUpdated = await GetByIdAsync(bil.Nummerplade);
         bilToBeUpdated.Nummerplade = bil.Nummerplade;
+        return bilToBeUpdated;
     }
 
     public async Task<IEnumerable<Bil>> GetAllAsync()

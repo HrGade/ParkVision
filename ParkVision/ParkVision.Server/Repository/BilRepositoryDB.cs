@@ -23,26 +23,30 @@ public class BilRepositoryDB : IBilRepository
         return await _context.Biler.FindAsync(id);
     }
 
-    public async Task AddAsync(Bil bil)
+    public async Task<Bil> AddAsync(Bil bil)
     {
         await _context.Biler.AddAsync(bil);
         await _context.SaveChangesAsync();
+        return bil;
     }
 
-    public async Task UpdateAsync(Bil bil)
+    public async Task<Bil> UpdateAsync(Bil bil)
     {
         _context.Biler.Update(bil);
         await _context.SaveChangesAsync();
+        return bil;
     }
 
-    public async Task DeleteAsync(string id)
+    public async Task<Bil?> DeleteAsync(string id)
     {
         var bil = await GetByIdAsync(id);
         if (bil != null)
         {
             _context.Biler.Remove(bil);
             await _context.SaveChangesAsync();
+            return bil;
         }
+        return null;
     }
 
     public async Task<bool> ExistsAsync(string id)

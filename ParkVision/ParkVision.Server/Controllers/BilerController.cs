@@ -16,25 +16,25 @@ namespace ParkVision.Server.Controllers;
 public class BilerController : ControllerBase
 {
    
-    private readonly BilRepositoryDB _Repository;
+    private readonly BilRepositoryDB _repository;
 
     public BilerController(BilRepositoryDB context)
     {
-        _Repository = context;
+        _repository = context;
     }
 
     // GET: api/Biler
     [HttpGet]
     public async Task<ActionResult<IEnumerable<Bil>>> GetBiler()
     {
-        return await _Repository.GetAllAsync();
+        return await _repository.GetAllAsync();
     }
 
     // GET: api/Biler/5
     [HttpGet("{id}")]
     public async Task<ActionResult<Bil>> GetBil(string id)
     {
-        var bil = await _Repository.GetByIdAsync(id);
+        var bil = await _repository.GetByIdAsync(id);
 
         if (bil == null)
         {
@@ -56,11 +56,11 @@ public class BilerController : ControllerBase
 
         try
         {
-            await _Repository.UpdateAsync(bil);
+            await _repository.UpdateAsync(bil);
         }
         catch (DbUpdateConcurrencyException)
         {
-            if (await _Repository.ExistsAsync(bil.Nummerplade))
+            if (await _repository.ExistsAsync(bil.Nummerplade))
             {
                 return NotFound();
             }
@@ -79,11 +79,11 @@ public class BilerController : ControllerBase
     {
         try
         {
-            await _Repository.AddAsync(bil);
+            await _repository.AddAsync(bil);
         }
         catch (DbUpdateException)
         {
-            if (await _Repository.ExistsAsync(bil.Nummerplade))
+            if (await _repository.ExistsAsync(bil.Nummerplade))
             {
                 return Conflict();
             }
@@ -100,13 +100,13 @@ public class BilerController : ControllerBase
     [HttpDelete("{id}")]
     public async Task<IActionResult> DeleteBil(string id)
     {
-        var bil = await _Repository.GetByIdAsync(id);
+        var bil = await _repository.GetByIdAsync(id);
         if (bil == null)
         {
             return NotFound();
         }
 
-       await _Repository.DeleteAsync(id);
+       await _repository.DeleteAsync(id);
         
         return NoContent();
     }
