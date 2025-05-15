@@ -27,14 +27,14 @@ public class BilerController : ControllerBase
     [HttpGet]
     public async Task<ActionResult<IEnumerable<Bil>>> GetBiler()
     {
-        return await _Repository.GetByIdAsync();
+        return await _Repository.GetAllAsync();
     }
 
     // GET: api/Biler/5
     [HttpGet("{id}")]
     public async Task<ActionResult<Bil>> GetBil(string id)
     {
-        var bil = await _Repository.GetBilByIdAsync(id);
+        var bil = await _Repository.GetByIdAsync(id);
 
         if (bil == null)
         {
@@ -56,11 +56,11 @@ public class BilerController : ControllerBase
 
         try
         {
-            await _Repository.UpdateBilAsync(bil);
+            await _Repository.UpdateAsync(bil);
         }
         catch (DbUpdateConcurrencyException)
         {
-            if (await _Repository.BilExistsAsync(bil.Nummerplade))
+            if (await _Repository.ExistsAsync(bil.Nummerplade))
             {
                 return NotFound();
             }
@@ -79,11 +79,11 @@ public class BilerController : ControllerBase
     {
         try
         {
-            await _Repository.AddBilAsync(bil);
+            await _Repository.AddAsync(bil);
         }
         catch (DbUpdateException)
         {
-            if (await _Repository.BilExistsAsync(bil.Nummerplade))
+            if (await _Repository.ExistsAsync(bil.Nummerplade))
             {
                 return Conflict();
             }
@@ -100,13 +100,13 @@ public class BilerController : ControllerBase
     [HttpDelete("{id}")]
     public async Task<IActionResult> DeleteBil(string id)
     {
-        var bil = await _Repository.GetBilByIdAsync(id);
+        var bil = await _Repository.GetByIdAsync(id);
         if (bil == null)
         {
             return NotFound();
         }
 
-       await _Repository.DeleteBilAsync(id);
+       await _Repository.DeleteAsync(id);
         
         return NoContent();
     }
