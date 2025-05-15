@@ -13,12 +13,12 @@ public class BilRepositoryDB : IBilRepository
         _context = context;
     }
 
-    public async Task<List<Bil>> GetAllAsync()
+    public async Task<IEnumerable<Bil>> GetAllAsync()
     {
         return await _context.Biler.ToListAsync();
     }
 
-    public async Task<Bil> GetByIdAsync(string id)
+    public async Task<Bil?> GetByIdAsync(string id)
     {
         return await _context.Biler.FindAsync(id);
     }

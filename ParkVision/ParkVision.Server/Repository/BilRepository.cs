@@ -2,102 +2,49 @@
 
 namespace ParkVision.Server.Repository;
 
-//public class BilRepository : IBilRepository
-//{
-//    private readonly List<Bil> _biler = [];
-//    private int _nextId = 1;
+public class BilRepository : IBilRepository
+{
+    private readonly List<Bil> _biler = [];
 
-//    private bool ValidateHandelsId(int id)
-//    {
-//        return _biler.Where(e => e.Nummerplade == id).Any();
-//    }
+    public async Task<bool> ExistsAsync(string id)
+    {
+        bool exists = _biler.Where(e => e.Nummerplade == id).Any();
+        return await Task.FromResult(exists);
+    }
 
-//    // Waiting with making XML docs.
-//    public Task<Bil?> GetById(string nummerplade)
-//    {
-//        return Task.FromResult(_biler.Find(e => e.Nummerplade == nummerplade));
-//    }
+    // Waiting with making XML docs.
+    public async Task<Bil?> GetByIdAsync(string id)
+    {
+        Bil? bil = _biler.Find(e => e.Nummerplade == id);
+        return await Task.FromResult(bil);
+    }
 
-//    public async Bil Add(Bil aktieHandel)
-//    {
-//        if (ValidateHandelsId(aktieHandel.HandelsId))
-//        {
-//            throw new ArgumentException(
-//                $"An Bil object already has this id: {aktieHandel.HandelsId}",
-//                nameof(aktieHandel));
-//        }
-//        aktieHandel.HandelsId = _nextId++;
-//        _biler.Add(aktieHandel);
-//        return aktieHandel;
-//    }
+    public async Task AddAsync(Bil bil)
+    {
+        if (await ExistsAsync(bil.Nummerplade))
+        {
+            throw new ArgumentException(
+                $"An Bil object already has this id: {bil.Nummerplade}",
+                nameof(bil));
+        }
+        _biler.Add(bil);
+    }
 
-//    public Bil? Delete(int id)
-//    {
-//        Bil? aktieHandelToBeDeleted = GetById(id);
-//        if (aktieHandelToBeDeleted == null)
-//        {
-//            return null;
-//        }
-//        _ = _biler.Remove(aktieHandelToBeDeleted);
-//        return aktieHandelToBeDeleted;
-//    }
+    public async Task DeleteAsync(string id)
+    {
+        Bil? bilToBeDeleted = await GetByIdAsync(id);
+        _ = _biler.Remove(bilToBeDeleted);
+    }
 
-//    public Bil? Update(int id, Bil data)
-//    {
-//        Bil? aktieHandelToBeUpdated = GetById(id);
-//        if (aktieHandelToBeUpdated == null)
-//        {
-//            return null;
-//        }
-//        aktieHandelToBeUpdated.Navn = data.Navn;
-//        aktieHandelToBeUpdated.Antal = data.Antal;
-//        aktieHandelToBeUpdated.HandelsPris = data.HandelsPris;
-//        return aktieHandelToBeUpdated;
-//    }
+    public async Task UpdateAsync(Bil bil)
+    {
+        Bil? bilToBeUpdated = await GetByIdAsync(bil.Nummerplade);
+        bilToBeUpdated.Nummerplade = bil.Nummerplade;
+    }
 
-//    public IEnumerable<Bil> Get(string? navn = null, int? antal = null,
-//        HandelsPrisComparison? handelsPrisComparer = null, string? orderBy = null)
-//    {
-//        IEnumerable<Bil> result = GetAll();
-//        if (navn != null)
-//        {
-//            result = result.Where(
-//                e => e.Navn.Contains(navn, StringComparison.OrdinalIgnoreCase));
-//        }
-//        if (antal != null)
-//        {
-//            result = result.Where(
-//                e => e.Antal == antal);
-//        }
-//        if (handelsPrisComparer != null)
-//        {
-//            result = result.Where(
-//                e => handelsPrisComparer(e.HandelsPris));
-//        }
-//        if (orderBy != null)
-//        {
-//            orderBy = orderBy.ToLower();
-//            switch (orderBy)
-//            {
-//                case "navn":
-//                case "navn_asc":
-//                    result = result.OrderBy(e => e.Navn);
-//                    break;
-
-//                case "navn_desc":
-//                    result = result.OrderByDescending(e => e.Navn);
-//                    break;
-
-//                case "handelspris":
-//                case "handelspris_asc":
-//                    result = result.OrderBy(e => e.HandelsPris);
-//                    break;
-
-//                case "handelspris_desc":
-//                    result = result.OrderByDescending(e => e.HandelsPris);
-//                    break;
-//            }
-//        }
-//        return result;
-//    }
-//}
+    public async Task<IEnumerable<Bil>> GetAllAsync()
+    {
+        IEnumerable<Bil> result = [.. _biler];
+        return await Task.FromResult(result);
+    }
+}
