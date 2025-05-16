@@ -50,7 +50,7 @@ public class BilRepositoryDB : IBilRepository
         }
         catch (DbUpdateException)
         {
-            if (await ExistsAsync(bil.Nummerplade))
+            if (!await ExistsAsync(bil.Nummerplade))
             {
                 return null;
             }
