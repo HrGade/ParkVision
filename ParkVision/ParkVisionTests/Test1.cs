@@ -17,25 +17,26 @@ public sealed class BilRepositoryTest
     };
 
     [TestMethod]
-    public void GetByIdIsNullTest()
+    public async Task GetByIdInvalidBilIsNull()
     {
-        var nullAktieHandel = _repository.GetByIdAsync("");
-        Assert.IsNull(nullAktieHandel);
+        var nullBil = await _repository.GetByIdAsync(_invalidBil.Nummerplade);
+        Assert.IsNull(nullBil);
     }
 
     [TestMethod]
-    public async void AddValidAktieHandelToListTest()
+    public async Task AddValidBilToList()
     {
-        Bil addedAktieHandel = await _repository.AddAsync(_validBil);
-        Bil? retreivedAktieHanel = await _repository.GetByIdAsync("AF22454");
-        Assert.IsNotNull(retreivedAktieHanel);
-        Assert.AreEqual(addedAktieHandel, retreivedAktieHanel);
+        Bil? addedBil = await _repository.AddAsync(_validBil);
+        Bil? retreivedBil = await _repository.GetByIdAsync(_validBil.Nummerplade);
+        Assert.IsNotNull(retreivedBil);
+        Assert.AreEqual(addedBil, retreivedBil);
     }
 
     [TestMethod]
-    public void FailAddDuplicateHandelsIdToListTest()
+    public async Task FailAddDuplicateBilToList()
     {
         _ = await _repository.AddAsync(_validBil);
-        Assert.ThrowsException<ArgumentException>(async () => await _repository.AddAsync(_invalidBil));
+        Bil? addedBil = await _repository.AddAsync(_validBil);
+        Assert.IsNull(addedBil);
     }
 }
