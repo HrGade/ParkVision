@@ -12,7 +12,6 @@ public class BilRepository : IBilRepository
         return await Task.FromResult(exists);
     }
 
-    // Waiting with making XML docs.
     public async Task<Bil?> GetByIdAsync(string id)
     {
         Bil? bil = _biler.Find(e => e.Nummerplade == id);
