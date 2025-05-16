@@ -19,28 +19,37 @@ public class BilRepository : IBilRepository
         return await Task.FromResult(bil);
     }
 
-    public async Task<Bil> AddAsync(Bil bil)
+    public async Task<Bil?> AddAsync(Bil bil)
     {
         if (await ExistsAsync(bil.Nummerplade))
         {
-            throw new ArgumentException(
-                $"An Bil object already has this id: {bil.Nummerplade}",
-                nameof(bil));
+            Console.WriteLine($"En Bil har allerede dette id: {bil.Nummerplade}");
+            return null;
         }
         _biler.Add(bil);
         return bil;
     }
 
-    public async Task<Bil> DeleteAsync(string id)
+    public async Task<Bil?> DeleteAsync(string id)
     {
         Bil? bilToBeDeleted = await GetByIdAsync(id);
+        if (bilToBeDeleted == null)
+        {
+            Console.WriteLine($"Kunne ikke finde bilen med nummerplade: {id}");
+            return null;
+        }
         _ = _biler.Remove(bilToBeDeleted);
         return bilToBeDeleted;
     }
 
-    public async Task<Bil> UpdateAsync(Bil bil)
+    public async Task<Bil?> UpdateAsync(string id, Bil bil)
     {
         Bil? bilToBeUpdated = await GetByIdAsync(bil.Nummerplade);
+        if (bilToBeUpdated == null)
+        {
+            Console.WriteLine($"Kunne ikke finde bilen med nummerplade: {bil.Nummerplade}");
+            return null;
+        }
         bilToBeUpdated.Nummerplade = bil.Nummerplade;
         return bilToBeUpdated;
     }
