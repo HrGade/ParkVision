@@ -21,7 +21,7 @@ public class BilerController : ControllerBase
     public async Task<ActionResult<IEnumerable<Bil>>> GetBiler()
     {
         var biler = await _repository.GetAllAsync();
-        if (!biler.Any())
+        if (!biler.Any()) // Controller har ansvar for at tjekke, om der er biler.
         {
             return NoContent();
         }
@@ -72,12 +72,11 @@ public class BilerController : ControllerBase
     [HttpDelete("{id}")]
     public async Task<IActionResult> DeleteBil(string id)
     {
-        Bil? bil = await _repository.GetByIdAsync(id);
+        Bil? bil = await _repository.DeleteAsync(id);
         if (bil == null)
         {
             return NotFound();
         }
-        _ = await _repository.DeleteAsync(id);
         return Ok(bil);
     }
 }
