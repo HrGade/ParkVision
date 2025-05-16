@@ -14,7 +14,7 @@ builder.Services.AddDbContext<BilDbContext>(options =>
         contextLifetime: ServiceLifetime.Scoped);
 
 
-builder.Services.AddScoped<BilRepositoryDB>(); // Register the repository as a singleton
+builder.Services.AddScoped<BilRepositoryDB>(); // Register the repository as scoped.
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
