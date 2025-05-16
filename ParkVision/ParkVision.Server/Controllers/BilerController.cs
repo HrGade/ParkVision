@@ -1,11 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using ParkVision.Server.DB;
+﻿using Microsoft.AspNetCore.Mvc;
 using ParkVision.Server.Model;
 using ParkVision.Server.Repository;
 
@@ -27,7 +20,12 @@ public class BilerController : ControllerBase
     [HttpGet]
     public async Task<ActionResult<IEnumerable<Bil>>> GetBiler()
     {
-        return await _repository.GetAllAsync();
+        var biler = await _repository.GetAllAsync();
+        if (!biler.Any())
+        {
+            return NoContent();
+        }
+        return Ok(biler);
     }
 
     // GET: api/Biler/5
@@ -35,13 +33,11 @@ public class BilerController : ControllerBase
     public async Task<ActionResult<Bil>> GetBil(string id)
     {
         var bil = await _repository.GetByIdAsync(id);
-
         if (bil == null)
         {
             return NotFound();
         }
-
-        return bil;
+        return Ok(bil);
     }
 
     // PUT: api/Biler/5
@@ -49,37 +45,26 @@ public class BilerController : ControllerBase
     [HttpPut("{id}")]
     public async Task<IActionResult> PutBil(string id, Bil bil)
     {
-        if (id != bil.Nummerplade)
+        if (id == bil.Nummerplade)
         {
             return BadRequest();
         }
-        if (await _repository.UpdateAsync(id, bil) == null)
+        Bil? changedBil = await _repository.UpdateAsync(id, bil);
+        if (changedBil == null)
         {
-                return NotFound();
-            }
-        return NoContent();
+            return NotFound();
+        }
+        return Ok(changedBil);
     }
 
     // POST: api/Biler
     [HttpPost]
     public async Task<ActionResult<Bil>> PostBil(Bil bil)
     {
-        try
+        if (await _repository.AddAsync(bil) == null)
         {
-            await _repository.AddAsync(bil);
+            return Conflict();
         }
-        catch (DbUpdateException)
-        {
-            if (await _repository.ExistsAsync(bil.Nummerplade))
-            {
-                return Conflict();
-            }
-            else
-            {
-                throw;
-            }
-        }
-
         return CreatedAtAction("GetBil", new { id = bil.Nummerplade }, bil);
     }
 
@@ -87,15 +72,12 @@ public class BilerController : ControllerBase
     [HttpDelete("{id}")]
     public async Task<IActionResult> DeleteBil(string id)
     {
-        var bil = await _repository.GetByIdAsync(id);
+        Bil? bil = await _repository.GetByIdAsync(id);
         if (bil == null)
         {
             return NotFound();
         }
-
-       await _repository.DeleteAsync(id);
-        
-        return NoContent();
+        _ = await _repository.DeleteAsync(id);
+        return Ok(bil);
     }
-    
 }

@@ -23,23 +23,34 @@ public class BilRepositoryDB : IBilRepository
         return await _context.Biler.FindAsync(id);
     }
 
-    public async Task<Bil> AddAsync(Bil bil)
+    public async Task<Bil?> AddAsync(Bil bil)
     {
-        await _context.Biler.AddAsync(bil);
-        await _context.SaveChangesAsync();
+        _ = await _context.Biler.AddAsync(bil);
+        try
+        {
+            _ = await _context.SaveChangesAsync();
+        }
+        catch (DbUpdateException)
+        {
+            if (await ExistsAsync(bil.Nummerplade))
+            {
+                return null;
+            }
+            throw;
+        }
         return bil;
     }
 
     public async Task<Bil?> UpdateAsync(string id, Bil bil)
     {
+        _ = _context.Biler.Update(bil);
         try
-    {
-        _context.Biler.Update(bil);
-        await _context.SaveChangesAsync();
-        }
-        catch (DbUpdateConcurrencyException)
         {
-            if (!await ExistsAsync(bil.Nummerplade))
+            _ = await _context.SaveChangesAsync();
+        }
+        catch (DbUpdateException)
+        {
+            if (await ExistsAsync(bil.Nummerplade))
             {
                 return null;
             }
@@ -50,19 +61,18 @@ public class BilRepositoryDB : IBilRepository
 
     public async Task<Bil?> DeleteAsync(string id)
     {
-        var bil = await GetByIdAsync(id);
-        if (bil != null)
+        Bil? bil = await GetByIdAsync(id);
+        if (bil == null)
         {
-            _context.Biler.Remove(bil);
-            await _context.SaveChangesAsync();
-            return bil;
+            return null;
         }
-        return null;
+        _ = _context.Biler.Remove(bil);
+        _ = await _context.SaveChangesAsync();
+        return bil;
     }
 
     public async Task<bool> ExistsAsync(string id)
     {
         return await _context.Biler.AnyAsync(e => e.Nummerplade == id);
     }
-
 }

@@ -1,6 +1,4 @@
-﻿[assembly: CLSCompliant(true)]
-
-namespace ParkVision.Server.Model;
+﻿namespace ParkVision.Server.Model;
 
 public class Bil
 {
