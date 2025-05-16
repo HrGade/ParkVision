@@ -30,10 +30,21 @@ public class BilRepositoryDB : IBilRepository
         return bil;
     }
 
-    public async Task<Bil> UpdateAsync(Bil bil)
+    public async Task<Bil?> UpdateAsync(string id, Bil bil)
+    {
+        try
     {
         _context.Biler.Update(bil);
         await _context.SaveChangesAsync();
+        }
+        catch (DbUpdateConcurrencyException)
+        {
+            if (!await ExistsAsync(bil.Nummerplade))
+            {
+                return null;
+            }
+            throw;
+        }
         return bil;
     }
 

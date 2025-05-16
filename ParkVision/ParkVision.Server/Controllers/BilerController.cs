@@ -53,23 +53,10 @@ public class BilerController : ControllerBase
         {
             return BadRequest();
         }
-
-        try
+        if (await _repository.UpdateAsync(id, bil) == null)
         {
-            await _repository.UpdateAsync(bil);
-        }
-        catch (DbUpdateConcurrencyException)
-        {
-            if (await _repository.ExistsAsync(bil.Nummerplade))
-            {
                 return NotFound();
             }
-            else
-            {
-                throw;
-            }
-        }
-
         return NoContent();
     }
 
