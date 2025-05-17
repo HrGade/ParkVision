@@ -73,7 +73,7 @@ public class BilerController : ControllerBase
         {
             return Conflict();
         }
-        return CreatedAtAction("GetBil", new { id = bil.Nummerplade }, bil);
+        return CreatedAtAction(nameof(GetBil), new { id = bil.Nummerplade }, bil);
     }
 
     // DELETE: api/Biler/5
