@@ -120,4 +120,18 @@ public sealed class BilRepositoryTest
         bool hasSameBilAmount = biler.Count() == _validTestNummerplader.Length;
         Assert.IsTrue(hasSameBilAmount);
     }
+
+    [TestMethod]
+    public async Task ValidateInvalidNummerplade()
+    {
+        bool isValidNummerplade = await _repository.ValidateNummerplade(_validBil1.Nummerplade);
+        Assert.IsTrue(isValidNummerplade);
+    }
+
+    [TestMethod]
+    public async Task ValidateValidNummerplade()
+    {
+        bool isValidNummerplade = await _repository.ValidateNummerplade(_invalidBil.Nummerplade);
+        Assert.IsFalse(isValidNummerplade);
+    }
 }

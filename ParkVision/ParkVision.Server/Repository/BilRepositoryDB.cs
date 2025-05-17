@@ -25,10 +25,6 @@ public class BilRepositoryDB : IBilRepository
 
     public async Task<Bil?> AddAsync(Bil bil)
     {
-        if (!await ValidateNummerplade(bil.Nummerplade))
-        {
-            return null;
-        }
         _ = await _context.Biler.AddAsync(bil);
         try
         {
@@ -47,10 +43,6 @@ public class BilRepositoryDB : IBilRepository
 
     public async Task<Bil?> UpdateAsync(string id, Bil bil)
     {
-        if (!await ValidateNummerplade(bil.Nummerplade))
-        {
-            return null;
-        }
         _ = _context.Biler.Update(bil);
         try
         {
