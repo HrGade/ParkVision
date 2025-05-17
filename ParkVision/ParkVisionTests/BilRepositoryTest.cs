@@ -39,4 +39,10 @@ public sealed class BilRepositoryTest
         Bil? addedBil = await _repository.AddAsync(_validBil);
         Assert.IsNull(addedBil);
     }
+
+    [TestMethod]
+    public async Task UpdateBilInList()
+    {
+
+    }
 }
