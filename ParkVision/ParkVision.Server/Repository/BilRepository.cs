@@ -6,10 +6,9 @@ public class BilRepository : IBilRepository
 {
     private readonly List<Bil> _biler = [];
 
-    public async Task<bool> ExistsAsync(string id)
+    public async Task<IEnumerable<Bil>> GetAllAsync()
     {
-        bool exists = _biler.Where(e => e.Nummerplade == id).Any();
-        return await Task.FromResult(exists);
+        return await Task.FromResult((IEnumerable<Bil>)[.. _biler]);
     }
 
     public async Task<Bil?> GetByIdAsync(string id)
@@ -24,11 +23,9 @@ public class BilRepository : IBilRepository
 
     public async Task<Bil?> AddAsync(Bil bil)
     {
-        if (bil.Nummerplade.Length > 7)
+        if (!await ValidateNummerplade(bil.Nummerplade))
         {
-            throw new ArgumentException("Nummerpladen på bilen har mere end 7 tegn:" +
-                $" {bil.Nummerplade} -> {bil.Nummerplade.Length} tegn",
-                nameof(bil));
+            return null;
         }
         if (await ExistsAsync(bil.Nummerplade))
         {
@@ -37,6 +34,21 @@ public class BilRepository : IBilRepository
         }
         _biler.Add(bil);
         return bil;
+    }
+
+    public async Task<Bil?> UpdateAsync(string id, Bil bil)
+    {
+        if (!await ValidateNummerplade(bil.Nummerplade))
+        {
+            return null;
+        }
+        Bil? bilToBeUpdated = await GetByIdAsync(id);
+        if (bilToBeUpdated == null)
+        {
+            return null;
+        }
+        bilToBeUpdated.Nummerplade = bil.Nummerplade;
+        return bilToBeUpdated;
     }
 
     public async Task<Bil?> DeleteAsync(string id)
@@ -49,20 +61,17 @@ public class BilRepository : IBilRepository
         _ = _biler.Remove(bilToBeDeleted);
         return bilToBeDeleted;
     }
-
-    public async Task<Bil?> UpdateAsync(string id, Bil bil)
+    public async Task<bool> ExistsAsync(string id)
     {
-        Bil? bilToBeUpdated = await GetByIdAsync(id);
-        if (bilToBeUpdated == null)
-        {
-            return null;
-        }
-        bilToBeUpdated.Nummerplade = bil.Nummerplade;
-        return bilToBeUpdated;
+        bool exists = _biler.Where(e => e.Nummerplade == id).Any();
+        return await Task.FromResult(exists);
     }
 
-    public async Task<IEnumerable<Bil>> GetAllAsync()
+    public async Task<bool> ValidateNummerplade(string id)
     {
-        return await Task.FromResult((IEnumerable<Bil>)[.. _biler]);
+        return await Task.Run(() =>
+        {
+            return id.Length <= 7;
+        });
     }
 }

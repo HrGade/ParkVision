@@ -50,7 +50,7 @@ public sealed class BilRepositoryTest
     }
 
     [TestMethod]
-    public async Task GetByIdInvalidBilIsNull()
+    public async Task GetByIdInvalidNummerplade()
     {
         var nullBil = await _repository.GetByIdAsync(_invalidBil.Nummerplade);
         Assert.IsNull(nullBil);
@@ -68,8 +68,6 @@ public sealed class BilRepositoryTest
     [TestMethod]
     public async Task FailAddInvalidBilToList()
     {
-        _ = await Assert.ThrowsExceptionAsync<ArgumentException>(
-            async () => await _repository.AddAsync(_invalidBil));
         Bil? retreivedBil = await _repository.GetByIdAsync(_invalidBil.Nummerplade);
         Assert.IsNull(retreivedBil);
     }
@@ -90,6 +88,15 @@ public sealed class BilRepositoryTest
         Bil? changedBil = await _repository.UpdateAsync(oldBil.Nummerplade, _validBil2);
         Assert.IsNotNull(changedBil);
         Assert.AreEqual(oldBil, changedBil);
+    }
+
+    [TestMethod]
+    public async Task UpdateBilInListWithInvalidNummerplade()
+    {
+        Bil oldBil = _validBil1;
+        _ = await _repository.AddAsync(oldBil);
+        Bil? changedBil = await _repository.UpdateAsync(oldBil.Nummerplade, _invalidBil);
+        Assert.IsNull(changedBil);
     }
 
     [TestMethod]

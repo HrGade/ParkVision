@@ -25,6 +25,10 @@ public class BilRepositoryDB : IBilRepository
 
     public async Task<Bil?> AddAsync(Bil bil)
     {
+        if (!await ValidateNummerplade(bil.Nummerplade))
+        {
+            return null;
+        }
         _ = await _context.Biler.AddAsync(bil);
         try
         {
@@ -43,6 +47,10 @@ public class BilRepositoryDB : IBilRepository
 
     public async Task<Bil?> UpdateAsync(string id, Bil bil)
     {
+        if (!await ValidateNummerplade(bil.Nummerplade))
+        {
+            return null;
+        }
         _ = _context.Biler.Update(bil);
         try
         {
@@ -74,5 +82,13 @@ public class BilRepositoryDB : IBilRepository
     public async Task<bool> ExistsAsync(string id)
     {
         return await _context.Biler.AnyAsync(e => e.Nummerplade == id);
+    }
+
+    public async Task<bool> ValidateNummerplade(string id)
+    {
+        return await Task.Run(() =>
+        {
+            return id.Length <= 7;
+        });
     }
 }
