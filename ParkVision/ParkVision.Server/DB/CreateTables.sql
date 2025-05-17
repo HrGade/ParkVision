@@ -3,14 +3,7 @@ GO
 
 -- Tabel: Bil
 CREATE TABLE Bil (
-    Nummerplade NVARCHAR(20) PRIMARY KEY,
-    EjerNavn NVARCHAR(50) NOT NULL,
-    BilTypeID INT NOT NULL FOREIGN KEY REFERENCES BilType(BilTypeID),
-    ModelID INT NOT NULL FOREIGN KEY REFERENCES BilModel(ModelID),
-    TypeNavn NVARCHAR(20) NOT NULL,
-    Maerke NVARCHAR(50) NOT NULL,
-    ModelNavn NVARCHAR(50) NOT NULL,
-    ErPrivatFormaal BIT NOT NULL DEFAULT 1
+    Nummerplade NVARCHAR(20) PRIMARY KEY
 );
 
 -- Tabel: Parkeringsplads

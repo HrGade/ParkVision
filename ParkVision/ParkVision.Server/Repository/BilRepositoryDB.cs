@@ -2,55 +2,77 @@
 using ParkVision.Server.DB;
 using ParkVision.Server.Model;
 
-namespace ParkVision.Server.Repository
+namespace ParkVision.Server.Repository;
+
+public class BilRepositoryDB : IBilRepository
 {
-    public class BilRepositoryDB : IBilRepositoryDB
+    private readonly BilDbContext _context;
+
+    public BilRepositoryDB(BilDbContext context)
     {
-        private readonly BilDbContext _context;
-
-        public BilRepositoryDB(BilDbContext context)
-        {
-            _context = context;
-        }
-
-        public async Task<List<Bil>> GetByIdAsync()
-        {
-            return await _context.Biler.ToListAsync();
-        }
-
-        public async Task<Bil> GetBilByIdAsync(string id)
-        {
-            return await _context.Biler.FindAsync(id);
-        }
-
-        public async Task AddBilAsync(Bil bil)
-        {
-            await _context.Biler.AddAsync(bil);
-            await _context.SaveChangesAsync();
-        }
-
-        public async Task UpdateBilAsync(Bil bil)
-        {
-            _context.Biler.Update(bil);
-            await _context.SaveChangesAsync();
-        }
-
-        public async Task DeleteBilAsync(string id)
-        {
-            var bil = await GetBilByIdAsync(id);
-            if (bil != null)
-            {
-                _context.Biler.Remove(bil);
-                await _context.SaveChangesAsync();
-            }
-        }
-
-        public async Task<bool> BilExistsAsync(string id)
-        {
-            return await _context.Biler.AnyAsync(e => e.Nummerplade == id);
-        }
-
+        _context = context;
     }
 
+    public async Task<IEnumerable<Bil>> GetAllAsync()
+    {
+        return await _context.Biler.ToListAsync();
+    }
 
+    public async Task<Bil?> GetByIdAsync(string id)
+    {
+        return await _context.Biler.FindAsync(id);
+    }
+
+    public async Task<Bil?> AddAsync(Bil bil)
+    {
+        _ = await _context.Biler.AddAsync(bil);
+        try
+        {
+            _ = await _context.SaveChangesAsync();
+        }
+        catch (DbUpdateException)
+        {
+            if (await ExistsAsync(bil.Nummerplade))
+            {
+                return null;
+            }
+            throw;
+        }
+        return bil;
+    }
+
+    public async Task<Bil?> UpdateAsync(string id, Bil bil)
+    {
+        _ = _context.Biler.Update(bil);
+        try
+        {
+            _ = await _context.SaveChangesAsync();
+        }
+        catch (DbUpdateException)
+        {
+            if (!await ExistsAsync(bil.Nummerplade))
+            {
+                return null;
+            }
+            throw;
+        }
+        return bil;
+    }
+
+    public async Task<Bil?> DeleteAsync(string id)
+    {
+        Bil? bil = await GetByIdAsync(id);
+        if (bil == null)
+        {
+            return null;
+        }
+        _ = _context.Biler.Remove(bil);
+        _ = await _context.SaveChangesAsync();
+        return bil;
+    }
+
+    public async Task<bool> ExistsAsync(string id)
+    {
+        return await _context.Biler.AnyAsync(e => e.Nummerplade == id);
+    }
 }
