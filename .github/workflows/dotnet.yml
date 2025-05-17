@@ -19,8 +19,11 @@ jobs:
       with:
         dotnet-version: 8.0.x
     - name: Restore dependencies
+      working-directory: ./ParkVision
       run: dotnet restore
     - name: Build
+      working-directory: ./ParkVision
       run: dotnet build --no-restore
     - name: Test
+      working-directory: ./ParkVision
       run: dotnet test --no-build --verbosity normal
