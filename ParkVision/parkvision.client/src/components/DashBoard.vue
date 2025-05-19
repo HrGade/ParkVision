@@ -76,6 +76,7 @@
 
 <script lang="js">
     import { defineComponent } from 'vue';
+    import axios from 'axios';
 
     export default defineComponent({
         data() {
@@ -98,11 +99,17 @@
                 this.post = null;
                 this.loading = true;
 
-                var response = await fetch('/api/Biler');
-                if (response.ok) {
-                    this.post = await response.json();
-                    this.loading = false;
-                }
+                axios.get('/api/Biler')
+                .then(response =>
+                {
+                  this.post = response.data;
+                  this.loading = false;
+                  console.log(response.data);
+                },
+                error =>
+                {
+                  console.log(error);
+                });
             }
       },
 
