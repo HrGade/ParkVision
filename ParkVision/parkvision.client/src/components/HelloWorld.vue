@@ -1,16 +1,13 @@
 <template>
   <body class="bg-gray-100 text-gray-800 font-sans">
     <div id="app" class="max-w-screen-xl mx-auto p-6">
-      <h1 class="text-3xl font-bold mb-6 text-center">📊 Pi Kamera Dashboard</h1>
+      <h1 class="text-3xl font-bold mb-6 text-center">📈 Pi Kamera Dashboard</h1>
 
       <!-- Kontrolknapper -->
       <div class="flex flex-wrap justify-center gap-4 mb-8">
         <button @click="hentBilleder" class="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded">
           🔄 Opdater billeder
-        </button>
-        <button @click="tagBillede" class="bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded">
-          📸 Tag nyt billede
-        </button>
+        </button> 
       </div>
 
       <div class="grid grid-cols-1 lg:grid-cols-4 gap-6">
@@ -75,49 +72,83 @@
 </template>
 
 <script lang="js">
-    import { defineComponent } from 'vue';
+  import { defineComponent } from 'vue';
 
-    export default defineComponent({
-        data() {
-            return {
-                loading: false,
-                post: null
-            };
-        },
-        async created() {
-            // fetch the data when the view is created and the data is
-            // already being observed
-            await this.fetchData();
-        },
-        watch: {
-            // call again the method if the route changes
-            '$route': 'fetchData'
-        },
-        methods: {
-            async fetchData() {
-                this.post = null;
-                this.loading = true;
+  const SYNBASE_API = 'https://api.synsbasen.dk/v1/vehicles';
+  const API_KEY = 'sb_sk_72ed12c2e4f9c8f4590032da932f2564'; // husk at holde den hemmelig!
 
-                var response = await fetch('/api/Biler');
-                if (response.ok) {
-                    this.post = await response.json();
-                    this.loading = false;
-                }
-            }
-      },
+  export default defineComponent({
+    data() {
+      return {
+        loading: false,
+        post: [],
+        billeder: [],
+        maxPladser: 40
+      };
+    },
 
-      data() {
-        return {
-          loading: false, post: null, billeder: [], maxPladser: 40
-        }
-      },
-      computed: {
-        ledigePladser() {
-          return this.maxPladser - (this.post ? this.post.length : 0);
-        }
+    async created() {
+      await this.fetchData();
+    },
 
+    watch: {
+      '$route': 'fetchData'
+    },
+
+    computed: {
+      ledigePladser() {
+        return this.maxPladser - (this.post ? this.post.length : 0);
       }
-    });
+    },
+
+    methods: {
+      async fetchData() {
+        this.loading = true;
+        this.post = [];
+
+        const response = await fetch('/api/Biler');
+        if (!response.ok) {
+          this.loading = false;
+          return;
+        }
+
+        const biler = await response.json();
+
+        const enriched = await Promise.all(
+          biler.map(async bil => {
+            const plade = bil.nummerplade?.toUpperCase();
+
+            try {
+              const res = await fetch(`${SYNBASE_API}?registration=${plade}`, {
+                headers: {
+                  'Authorization': `Bearer ${API_KEY}`,
+                  'Content-Type': 'application/json'
+                }
+              });
+
+              if (!res.ok) throw new Error('API fejl');
+
+              const data = await res.json();
+
+              return {
+                ...bil,
+                brand: data?.data?.brand,
+                model: data?.data?.brand_and_model,
+                fuel: data?.data?.fuel_type,
+                category: data?.data?.category
+              };
+            } catch (err) {
+              console.warn(`Fejl ved opslag af: ${plade}`, err);
+              return bil; // fallback
+            }
+          })
+        );
+
+        this.post = enriched;
+        this.loading = false;
+      }
+    }
+  });
 </script>
 
 <style scoped>
