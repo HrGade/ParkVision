@@ -50,7 +50,6 @@ public class BilRepository : IBilRepository
         bilToBeUpdated.Nummerplade = bil.Nummerplade;
         return bilToBeUpdated;
     }
-
     public async Task<Bil?> DeleteAsync(string id)
     {
         Bil? bilToBeDeleted = await GetByIdAsync(id);
