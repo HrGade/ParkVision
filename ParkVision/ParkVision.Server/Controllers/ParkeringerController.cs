@@ -23,19 +23,24 @@ public class ParkeringerController : ControllerBase
     [HttpGet]
     public async Task<ActionResult<IEnumerable<Parkering>>> GetParkering()
     {
-        return await _context.Parkering.ToListAsync();
+        return await _context.Parkering
+            .Include(p => p.Bil)
+            .Include(p => p.Parkeringsplads).ToListAsync();
     }
 
     // GET: api/Parkeringer/5
     [HttpGet("{id}")]
     public async Task<ActionResult<ParkeringDTO>> GetParkering(int id)
     {
-        var parkering = await _context.Parkering.FindAsync();
+        Parkering? parkering = await _context.Parkering.FindAsync(id);
         if (parkering == null)
         {
             return NotFound();
         }
-        return parkering;
+        _context.Entry(parkering).Reference(p => p.Bil).Load();
+        _context.Entry(parkering).Reference(p => p.Parkeringsplads).Load();
+        ParkeringDTO parkeringDTO = ConvertActor.Parkering2ParkeringDTO(parkering);
+        return Ok(parkeringDTO);
     }
 
     // PUT: api/Parkeringer/5
