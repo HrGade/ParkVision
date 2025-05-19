@@ -11,10 +11,10 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddDbContext<BilDbContext>(options =>
     options.UseSqlServer(
         builder.Configuration.GetConnectionString("DefaultConnection")), 
-        contextLifetime: ServiceLifetime.Singleton);
+        contextLifetime: ServiceLifetime.Scoped);
 
 
-builder.Services.AddSingleton<BilRepositoryDB>(); // Register the repository as a singleton
+builder.Services.AddScoped<BilRepositoryDB>(); // Register the repository as scoped.
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
