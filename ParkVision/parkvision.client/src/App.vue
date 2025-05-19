@@ -1,10 +1,10 @@
 <script setup>
-import HelloWorld from './components/Dashboard.vue'
+  import Dashboard from './components/Dashboard.vue'
 </script>
 
 <template>
   <div class="wrapper">
-    <HelloWorld msg="You did it!" />
+    <Dashboard />
   </div>
 </template>
 
