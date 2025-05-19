@@ -1,16 +1,28 @@
--- Skal kun køres på test-database, ikke kundens rigtige database! -- 
-
 USE ParkVisionDB;
 GO
-
---TRUNCATE TABLE [dbo].[Bil]
 
 INSERT INTO [dbo].[Bil] (
 [Nummerplade]
 )
 VALUES
-('TEST1235'),
-('TEST8572'),
-('TEST3744');
+('TEST123'),
+('TEST857'),
+('TEST374');
 
--- Mangler Parkering og Pakeringsplads.
+INSERT INTO [dbo].[Parkeringsplads] (
+[LedigePladser],
+[Adresse]
+)
+VALUES
+(50, 'Adresse1'),
+(100, 'Adresse2');
+
+--INSERT INTO [dbo].[Parkering] (
+--[Nummerplade],
+--[ParkeringspladsID],
+--[IndkoerselTid],
+--[UdkoerselTid]
+--)
+--VALUES
+--('TEST123', 1, ,),
+--('TEST857', 2, ,);

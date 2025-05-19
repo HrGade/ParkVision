@@ -49,6 +49,10 @@ public class BilerController : ControllerBase
         {
             return BadRequest();
         }
+        if (!await _repository.ValidateNummerplade(bil.Nummerplade))
+        {
+            return BadRequest();
+        }
         Bil? changedBil = await _repository.UpdateAsync(id, bil);
         if (changedBil == null)
         {
@@ -61,11 +65,15 @@ public class BilerController : ControllerBase
     [HttpPost]
     public async Task<ActionResult<Bil>> PostBil(Bil bil)
     {
+        if (!await _repository.ValidateNummerplade(bil.Nummerplade))
+        {
+            return BadRequest();
+        }
         if (await _repository.AddAsync(bil) == null)
         {
             return Conflict();
         }
-        return CreatedAtAction("GetBil", new { id = bil.Nummerplade }, bil);
+        return CreatedAtAction(nameof(GetBil), new { id = bil.Nummerplade }, bil);
     }
 
     // DELETE: api/Biler/5

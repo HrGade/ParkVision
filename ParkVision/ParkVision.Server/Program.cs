@@ -8,7 +8,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 
 
-builder.Services.AddDbContext<BilDbContext>(options =>
+builder.Services.AddDbContext<ParkVisionDbContext>(options =>
     options.UseSqlServer(
         builder.Configuration.GetConnectionString("DefaultConnection")), 
         contextLifetime: ServiceLifetime.Scoped);
