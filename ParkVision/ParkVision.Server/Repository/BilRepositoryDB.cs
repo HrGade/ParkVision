@@ -6,9 +6,9 @@ namespace ParkVision.Server.Repository;
 
 public class BilRepositoryDB : IBilRepository
 {
-    private readonly BilDbContext _context;
+    private readonly ParkVisionDbContext _context;
 
-    public BilRepositoryDB(BilDbContext context)
+    public BilRepositoryDB(ParkVisionDbContext context)
     {
         _context = context;
     }
