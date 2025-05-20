@@ -21,31 +21,43 @@ public class ParkeringerController : ControllerBase
 
     // GET: api/Parkeringer
     [HttpGet]
-    public async Task<ActionResult<IEnumerable<Parkering>>> GetParkering()
+    public async Task<ActionResult<IEnumerable<ParkeringDTO>>> GetParkering()
     {
-        return await _context.Parkering
+        List<Parkering> allParkering = await _context.Parkeringer
             .Include(p => p.Bil)
-            .Include(p => p.Parkeringsplads).ToListAsync();
+            .Include(p => p.Parkeringsplads)
+            .ToListAsync();
+        if (allParkering.Count == 0) // Controller har ansvar for at tjekke, om der er biler.
+        {
+            return NoContent();
+        }
+        List<ParkeringDTO> parkeringDTOs = [];
+        foreach (var parkering in allParkering)
+        {
+            ParkeringDTO conversion = ConvertActor.Parkering2ParkeringDTO(parkering);
+            parkeringDTOs.Add(conversion);
+        }
+        return Ok(parkeringDTOs);
     }
 
     // GET: api/Parkeringer/5
     [HttpGet("{id}")]
     public async Task<ActionResult<ParkeringDTO>> GetParkering(int id)
     {
-        Parkering? parkering = await _context.Parkering.FindAsync(id);
+        Parkering? parkering = await _context.Parkeringer.FindAsync(id);
         if (parkering == null)
         {
             return NotFound();
         }
         _context.Entry(parkering).Reference(p => p.Bil).Load();
         _context.Entry(parkering).Reference(p => p.Parkeringsplads).Load();
-        ParkeringDTO parkeringDTO = ConvertActor.Parkering2ParkeringDTO(parkering);
-        return Ok(parkeringDTO);
+        ParkeringDTO conversion = ConvertActor.Parkering2ParkeringDTO(parkering);
+        return Ok(conversion);
     }
 
     // PUT: api/Parkeringer/5
     [HttpPut("{id}")]
-    public async Task<IActionResult> PutParkering(int id, Parkering parkering)
+    public async Task<IActionResult> PutParkering(int id, ParkeringDTO parkering)
     {
         if (id != parkering.ParkeringID)
         {
@@ -62,39 +74,44 @@ public class ParkeringerController : ControllerBase
             {
                 return NotFound();
             }
-            else
-            {
-                throw;
-            }
+            throw;
         }
         return NoContent();
     }
 
     // POST: api/Parkeringer
     [HttpPost]
-    public async Task<ActionResult<Parkering>> PostParkering(Parkering parkering)
+    public async Task<ActionResult<ParkeringDTO>> PostParkering(ParkeringDTOPost parkeringDTOPost)
     {
-        _context.Parkering.Add(parkering);
+        Parkering parkering = ConvertActor.ParkeringDTOPost2Parkering(parkeringDTOPost);
+        _context.Parkeringer.Add(parkering);
+        Parkeringsplads? parkeringsplads = await _context.Parkeringspladser.FindAsync(parkeringDTOPost.ParkeringspladsID);
+        if (parkeringsplads == null)
+        {
+            return BadRequest();
+        }
+        parkering.Parkeringsplads = parkeringsplads;
         await _context.SaveChangesAsync();
-        return CreatedAtAction("GetParkering", new { id = parkering.ParkeringID }, parkering);
+        ParkeringDTO conversion = ConvertActor.Parkering2ParkeringDTO(parkering);
+        return CreatedAtAction("GetParkering", new { id = parkering.ParkeringID }, conversion);
     }
 
     // DELETE: api/Parkeringer/5
     [HttpDelete("{id}")]
     public async Task<IActionResult> DeleteParkering(int id)
     {
-        var parkering = await _context.Parkering.FindAsync(id);
+        var parkering = await _context.Parkeringer.FindAsync(id);
         if (parkering == null)
         {
             return NotFound();
         }
-        _context.Parkering.Remove(parkering);
+        _context.Parkeringer.Remove(parkering);
         await _context.SaveChangesAsync();
         return NoContent();
     }
 
     private bool ParkeringExists(int id)
     {
-        return _context.Parkering.Any(e => e.ParkeringID == id);
+        return _context.Parkeringer.Any(e => e.ParkeringID == id);
     }
 }

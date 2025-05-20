@@ -1,10 +1,9 @@
 ﻿namespace ParkVision.Server.Model;
 
-public class ParkeringDTO
+public class ParkeringDTOPost
 {
-    public required int ParkeringID { get; set; }
     public required Bil Bil { get; set; }
-    public required Parkeringsplads Parkeringsplads { get; set; }
+    public required int ParkeringspladsID { get; set; }
     public required DateTime IndkoerselTid { get; set; }
     public DateTime? UdkoerselTid { get; set; }
 }

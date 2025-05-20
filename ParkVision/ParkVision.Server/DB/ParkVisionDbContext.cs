@@ -6,7 +6,8 @@ namespace ParkVision.Server.DB;
 public class ParkVisionDbContext : DbContext
 {
     public DbSet<Bil> Biler { get; set; } = default!;
-    public DbSet<Parkering> Parkering { get; set; } = default!;
+    public DbSet<Parkeringsplads> Parkeringspladser { get; set; } = default!;
+    public DbSet<Parkering> Parkeringer { get; set; } = default!;
 
     public ParkVisionDbContext(DbContextOptions<ParkVisionDbContext> options) : base(options) { }
 
@@ -14,6 +15,7 @@ public class ParkVisionDbContext : DbContext
     {
         optionsBuilder.UseSqlServer(
             "server=(localdb)\\MSSQLLocalDB;database=ParkVisionDB;trusted_connection=true;");
+            //"server=mssql8.unoeuro.com;Database=adamgadefrimann_dk_db_parkvision;User Id=adamgadefrimann_dk;Password=EAez96yf4RD5xphGb3wg"
     }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)

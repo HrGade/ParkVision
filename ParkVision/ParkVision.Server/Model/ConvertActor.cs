@@ -27,4 +27,24 @@ public static class ConvertActor
             UdkoerselTid = parkering.UdkoerselTid
         };
     }
+
+    public static Parkering ParkeringDTOPost2Parkering(ParkeringDTOPost parkeringDTOPost)
+    {
+        return new Parkering
+        {
+            Nummerplade = parkeringDTOPost.Bil.Nummerplade,
+            Bil = parkeringDTOPost.Bil,
+            ParkeringspladsID = parkeringDTOPost.ParkeringspladsID,
+            IndkoerselTid = parkeringDTOPost.IndkoerselTid,
+            UdkoerselTid = parkeringDTOPost.UdkoerselTid
+        };
+    }
+
+    public static BilDTO Bil2BilDTO(Bil bil)
+    {
+        return new BilDTO
+        {
+            Bil = new Bil { Nummerplade = bil.Nummerplade }
+        };
+    }
 }
