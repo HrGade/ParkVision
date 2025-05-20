@@ -58,7 +58,7 @@ public class BilerController : ControllerBase
         {
             return NotFound();
         }
-        return Ok(bil);
+        return Ok(changedBil);
     }
 
     // POST: api/Biler
