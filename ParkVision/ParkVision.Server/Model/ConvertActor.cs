@@ -39,12 +39,4 @@ public static class ConvertActor
             UdkoerselTid = parkeringDTOPost.UdkoerselTid
         };
     }
-
-    public static BilDTO Bil2BilDTO(Bil bil)
-    {
-        return new BilDTO
-        {
-            Bil = new Bil { Nummerplade = bil.Nummerplade }
-        };
-    }
 }

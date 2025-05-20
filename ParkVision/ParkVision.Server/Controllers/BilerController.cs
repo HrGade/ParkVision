@@ -18,70 +18,62 @@ public class BilerController : ControllerBase
 
     // GET: api/Biler
     [HttpGet]
-    public async Task<ActionResult<IEnumerable<BilDTO>>> GetBiler()
+    public async Task<ActionResult<IEnumerable<Bil>>> GetBiler()
     {
         var biler = await _repository.GetAllAsync();
         if (!biler.Any()) // Controller har ansvar for at tjekke, om der er biler.
         {
             return NoContent();
         }
-        List<BilDTO> bilerDTO = [];
-        foreach (var bil in biler)
-        {
-            BilDTO conversion = ConvertActor.Bil2BilDTO(bil);
-            bilerDTO.Add(conversion);
-        }
-        return Ok(bilerDTO);
+        return Ok(biler);
     }
 
     // GET: api/Biler/5
     [HttpGet("{id}")]
-    public async Task<ActionResult<BilDTO>> GetBil(string id)
+    public async Task<ActionResult<Bil>> GetBil(string id)
     {
         var bil = await _repository.GetByIdAsync(id);
         if (bil == null)
         {
             return NotFound();
         }
-        BilDTO conversion = ConvertActor.Bil2BilDTO(bil);
-        return Ok(conversion);
+        return Ok(bil);
     }
 
     // PUT: api/Biler/5
     // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
     [HttpPut("{id}")]
-    public async Task<ActionResult<BilDTO>> PutBil(string id, BilDTO bil)
+    public async Task<ActionResult<Bil>> PutBil(string id, Bil bil)
     {
-        if (id == bil.Bil.Nummerplade)
+        if (id == bil.Nummerplade)
         {
             return BadRequest();
         }
-        if (!await _repository.ValidateNummerplade(bil.Bil.Nummerplade))
+        if (!await _repository.ValidateNummerplade(bil.Nummerplade))
         {
             return BadRequest();
         }
-        Bil? changedBil = await _repository.UpdateAsync(id, bil.Bil);
+        Bil? changedBil = await _repository.UpdateAsync(id, bil);
         if (changedBil == null)
         {
             return NotFound();
         }
-        BilDTO conversion = ConvertActor.Bil2BilDTO(changedBil);
-        return Ok(conversion);
+        return Ok(bil);
     }
 
     // POST: api/Biler
     [HttpPost]
-    public async Task<ActionResult<BilDTO>> PostBil(BilDTO bil)
+    public async Task<ActionResult<Bil>> PostBil(Bil bil)
     {
-        if (!await _repository.ValidateNummerplade(bil.Bil.Nummerplade))
+        if (!await _repository.ValidateNummerplade(bil.Nummerplade))
         {
             return BadRequest();
         }
-        if (await _repository.AddAsync(bil.Bil) == null)
+        if (await _repository.AddAsync(bil) == null)
         {
             return Conflict();
         }
-        return CreatedAtAction(nameof(GetBil), new { id = bil.Bil.Nummerplade }, ConvertActor.Bil2BilDTO(bil.Bil));
+        return CreatedAtAction(nameof(GetBil), new { id = bil.Nummerplade }, bil);
     }
 
     // DELETE: api/Biler/5
