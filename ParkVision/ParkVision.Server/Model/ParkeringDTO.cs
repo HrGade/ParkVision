@@ -1,5 +1,8 @@
 ﻿namespace ParkVision.Server.Model;
 
+/// <summary>
+/// 
+/// </summary>
 public class ParkeringDTO
 {
     public required int ParkeringID { get; set; }

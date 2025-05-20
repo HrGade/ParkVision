@@ -18,7 +18,7 @@
         post: null
       };
     },
-    async created() {
+    async beforeCreate() {
       // fetch the data when the view is created and the data is
       // already being observed
       await this.fetchData();
@@ -40,8 +40,10 @@
         })
           .then(response => {
             this.post = response.data;
+            this.$synsbasedata = response.data;
             this.loading = false;
-            console.log(response.data);
+            //console.log(response.data);
+            //console.log(this.$synsbasedata)
           },
             error => {
               console.log(error);

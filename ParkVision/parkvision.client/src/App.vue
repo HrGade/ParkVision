@@ -2,6 +2,30 @@
   import Dashboard from './components/Dashboard.vue'
 </script>
 
+<script lang="js">
+  async fetchData() {
+    this.post = null;
+    this.loading = true;
+
+    axios.get('https://api.synsbasen.dk/v1/brands', {
+      headers: {
+        'Authorization': 'Bearer sb_sk_72ed12c2e4f9c8f4590032da932f2564',
+        'Content-Type': 'application/json'
+      }
+    })
+      .then(response => {
+        this.post = response.data;
+        this.$synsbasedata = response.data;
+        this.loading = false;
+        //console.log(response.data);
+        //console.log(this.$synsbasedata)
+      },
+        error => {
+          console.log(error);
+        });
+  };
+</script>
+
 <template>
   <div class="wrapper">
     <Dashboard />

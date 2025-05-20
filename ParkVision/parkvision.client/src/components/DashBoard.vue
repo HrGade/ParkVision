@@ -69,8 +69,9 @@
 </template>
 
 <script setup>
-    import Registrations from './Registrations.vue';
+    /*import Registrations from './Registrations.vue';*/
     import Synsbase from './SynsbaseData.vue';
+    import Registrations from './Registrations.vue';
 </script>
 
 <style scoped>

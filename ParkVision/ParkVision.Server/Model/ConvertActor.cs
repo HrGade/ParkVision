@@ -1,5 +1,6 @@
 ﻿namespace ParkVision.Server.Model;
 
+
 public static class ConvertActor
 {
     public static Parkering ParkeringDTO2Parkering(ParkeringDTO parkeringDTO)

@@ -4,5 +4,7 @@ import { createApp } from 'vue'
 import App from './App.vue'
 
 const app = createApp(App)
-//app.component("Registrations")
+
+app.config.globalProperties.$synsbasedata;
+
 app.mount('#app')

@@ -21,7 +21,8 @@
     async created() {
       // fetch the data when the view is created and the data is
       // already being observed
-      await this.fetchData();
+      //await this.fetchData();
+      console.log(this.$synsbasedata)
     },
     watch: {
       // call again the method if the route changes
@@ -37,6 +38,7 @@
             this.post = response.data;
             this.loading = false;
             console.log(response.data);
+            console.log(this.$synsbasedata)
           },
             error => {
               console.log(error);

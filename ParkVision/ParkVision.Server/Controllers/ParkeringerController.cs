@@ -24,6 +24,8 @@ public class ParkeringerController : ControllerBase
     public async Task<ActionResult<IEnumerable<ParkeringDTO>>> GetParkering()
     {
         List<Parkering> allParkering = await _context.Parkeringer
+            // Include sørger at Bil og Parkeringsplads objekterne (deres data)
+            // bliver sendt med i svaret til klienten.
             .Include(p => p.Bil)
             .Include(p => p.Parkeringsplads)
             .ToListAsync();
