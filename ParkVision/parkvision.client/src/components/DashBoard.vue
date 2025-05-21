@@ -7,9 +7,6 @@
       <button @click="hentBilleder" class="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded">
         🔄 Opdater billeder
       </button>
-      <button @click="tagBillede" class="bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded">
-        📸 Tag nyt billede
-      </button>
     </div>
 
     <div class="grid grid-cols-1 lg:grid-cols-4 gap-6">
