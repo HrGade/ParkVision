@@ -24,8 +24,10 @@ public class ParkeringerController : ControllerBase
     public async Task<ActionResult<IEnumerable<ParkeringDTO>>> GetParkering()
     {
         List<Parkering> allParkering = await _context.Parkeringer
-            // Include sørger at Bil og Parkeringsplads objekterne (deres data)
+            // Include sørger at Bil og Parkeringsplads objekterne (deres data) bliver taget med,
+            // når de bliver hentet fra databasen.
             // bliver sendt med i svaret til klienten.
+            // https://learn.microsoft.com/en-us/aspnet/web-api/overview/data/using-web-api-with-entity-framework/part-4#eager-loading-versus-lazy-loading
             .Include(p => p.Bil)
             .Include(p => p.Parkeringsplads)
             .ToListAsync();
@@ -33,6 +35,9 @@ public class ParkeringerController : ControllerBase
         {
             return NoContent();
         }
+        // Parkering-modellen bliver konvertet til en DTO
+        // med mindre (mere relevant information),
+        // som API-kalderen modtager som svar.
         List<ParkeringDTO> parkeringDTOs = [];
         foreach (var parkering in allParkering)
         {
@@ -51,8 +56,10 @@ public class ParkeringerController : ControllerBase
         {
             return NotFound();
         }
-        _context.Entry(parkering).Reference(p => p.Bil).Load();
-        _context.Entry(parkering).Reference(p => p.Parkeringsplads).Load();
+        // Model objekter der er properties i vores parkering bliver ikke automatisk hentet,
+        // så vi er nødt til at load dem explicit.
+        await _context.Entry(parkering).Reference(p => p.Bil).LoadAsync();
+        await _context.Entry(parkering).Reference(p => p.Parkeringsplads).LoadAsync();
         ParkeringDTO conversion = ConvertActor.Parkering2ParkeringDTO(parkering);
         return Ok(conversion);
     }

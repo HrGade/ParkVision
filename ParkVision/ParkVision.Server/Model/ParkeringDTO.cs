@@ -1,7 +1,9 @@
 ﻿namespace ParkVision.Server.Model;
 
 /// <summary>
-/// 
+/// DTO model som vi benyttes i tilfælde af, at vi gerne vil sende 
+/// data tilbage til API-kalderen, men vi vil ikke sende dem ALT informationen on en parkering, 
+/// kun det som er relevant for dem.
 /// </summary>
 public class ParkeringDTO
 {
