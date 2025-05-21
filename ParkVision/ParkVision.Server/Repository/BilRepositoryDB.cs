@@ -6,9 +6,9 @@ namespace ParkVision.Server.Repository;
 
 public class BilRepositoryDB : IBilRepository
 {
-    private readonly BilDbContext _context;
+    private readonly ParkVisionDbContext _context;
 
-    public BilRepositoryDB(BilDbContext context)
+    public BilRepositoryDB(ParkVisionDbContext context)
     {
         _context = context;
     }
@@ -74,5 +74,13 @@ public class BilRepositoryDB : IBilRepository
     public async Task<bool> ExistsAsync(string id)
     {
         return await _context.Biler.AnyAsync(e => e.Nummerplade == id);
+    }
+
+    public async Task<bool> ValidateNummerplade(string id)
+    {
+        return await Task.Run(() =>
+        {
+            return id.Length <= 7;
+        });
     }
 }

@@ -43,9 +43,13 @@ public class BilerController : ControllerBase
     // PUT: api/Biler/5
     // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
     [HttpPut("{id}")]
-    public async Task<IActionResult> PutBil(string id, Bil bil)
+    public async Task<ActionResult<Bil>> PutBil(string id, Bil bil)
     {
         if (id == bil.Nummerplade)
+        {
+            return BadRequest();
+        }
+        if (!await _repository.ValidateNummerplade(bil.Nummerplade))
         {
             return BadRequest();
         }
@@ -61,11 +65,15 @@ public class BilerController : ControllerBase
     [HttpPost]
     public async Task<ActionResult<Bil>> PostBil(Bil bil)
     {
+        if (!await _repository.ValidateNummerplade(bil.Nummerplade))
+        {
+            return BadRequest();
+        }
         if (await _repository.AddAsync(bil) == null)
         {
             return Conflict();
         }
-        return CreatedAtAction("GetBil", new { id = bil.Nummerplade }, bil);
+        return CreatedAtAction(nameof(GetBil), new { id = bil.Nummerplade }, bil);
     }
 
     // DELETE: api/Biler/5
@@ -77,6 +85,6 @@ public class BilerController : ControllerBase
         {
             return NotFound();
         }
-        return Ok(bil);
+        return NoContent();
     }
 }
