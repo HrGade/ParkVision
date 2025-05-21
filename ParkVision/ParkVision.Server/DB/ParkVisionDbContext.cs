@@ -14,8 +14,7 @@ public class ParkVisionDbContext : DbContext
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
         optionsBuilder.UseSqlServer(
-            "server=(localdb)\\MSSQLLocalDB;database=ParkVisionDB;trusted_connection=true;");
-            //"server=mssql8.unoeuro.com;Database=adamgadefrimann_dk_db_parkvision;User Id=adamgadefrimann_dk;Password=EAez96yf4RD5xphGb3wg"
+            "server=mssql8.unoeuro.com;Database=adamgadefrimann_dk_db_parkvision;User Id=adamgadefrimann_dk;Password=EAez96yf4RD5xphGb3wg");
     }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)

@@ -21,8 +21,7 @@
     async created() {
       // fetch the data when the view is created and the data is
       // already being observed
-      //await this.fetchData();
-      console.log(this.$synsbasedata)
+      await this.fetchData();
     },
     watch: {
       // call again the method if the route changes
@@ -37,26 +36,13 @@
           .then(response => {
             this.post = response.data;
             this.loading = false;
-            console.log(response.data);
-            console.log(this.$synsbasedata)
+            //console.log(response.data);
           },
             error => {
               console.log(error);
             });
       }
     },
-
-    //data() {
-    //  return {
-    //    loading: false, post: null, billeder: [], maxPladser: 40
-    //  }
-    //},
-    //computed: {
-    //  ledigePladser() {
-    //    return this.maxPladser - (this.post ? this.post.length : 0);
-    //  }
-
-    //}
   });
 </script>
 

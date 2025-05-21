@@ -5,6 +5,4 @@ import App from './App.vue'
 
 const app = createApp(App)
 
-app.config.globalProperties.$synsbasedata;
-
 app.mount('#app')

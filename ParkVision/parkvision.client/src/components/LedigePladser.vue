@@ -1,53 +1,70 @@
 <template>
-  <div class="lg:col-span-1 bg-white p-4 rounded shadow h-full">
-    <h2 class="text-lg font-semibold mb-3">🔍 Sidste 10 registreringer</h2>
-    <ul class="space-y-1 text-sm font-mono max-h-96 overflow-y-auto">
-      <li v-for="bil in get" :key="bil.Nummerplade" class="border-b pb-1">{{ bil.nummerplade }}</li>
-    </ul>
+  <div class="bg-white p-6 rounded shadow text-center">
+    <h2 class="text-xl font-semibold mb-2">🅿️ Ledige pladser på parkeringsplads 1</h2>
+    <p class="text-4xl font-bold"
+       :class="{
+       'text-green-600' : ledigePladser>
+      10,
+      'text-yellow-500': ledigePladser <= 10 && ledigePladser > 3,
+      'text-red-600': ledigePladser <= 3
+      }"
+      >
+      {{ ledigePladser }} / {{ maxPladser }}
+    </p>
   </div>
 </template>
 
-<script lang="ts">
-    import { defineComponent } from 'vue';
+<script lang="js">
+  import { defineComponent } from 'vue';
+  import axios from 'axios';
 
-    export default defineComponent({
-        components: {
-        },
-        directives: {
-        },
-        filters: {
-        },
-        props: {
-        },
-        data() {
-            return {
-            }
-        },
-        computed: {
-        },
-        watch: {
-        },
-        beforeCreate() {
-        },
-        created() {
-        },
-        beforeMount() {
-        },
-        mounted() {
-        },
-        updated() {
-        },
-        activated() {
-        },
-        deactivated() {
-        },
-        beforeDestroy() {
-        },
-        destroyed() {
-        },
-        methods: {
-        },
-    });
+  export default defineComponent({
+    data() {
+      return {
+        loading: false,
+        post: null,
+        billeder: [],
+        maxPladser: 0
+      };
+    },
+    async created() {
+      // fetch the data when the view is created and the data is
+      // already being observed
+      await this.fetchData();
+    },
+    watch: {
+      // call again the method if the route changes
+      '$route': 'fetchData'
+    },
+    methods: {
+      async fetchData() {
+        this.post = null;
+        this.loading = true;
+
+        axios.get('/api/Parkeringspladser/1')
+          .then(response => {
+            this.maxPladser = response.data['ledigePladser'];
+          },
+            error => {
+              console.log(error);
+            });
+
+        axios.get('/api/Biler')
+          .then(response => {
+            this.post = response.data;
+            this.loading = false;
+          },
+            error => {
+              console.log(error);
+            });
+      }
+    },
+    computed: {
+      ledigePladser() {
+        return this.maxPladser - (this.post ? this.post.length : 0);
+      }
+    }
+  });
 </script>
 
 <style>
